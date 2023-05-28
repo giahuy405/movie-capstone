@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model banner {
+  banner_id Int     @id @default(autoincrement())
+  film_id   Int
+  image     String? @db.VarChar(255)
+  film      film    @relation(fields: [film_id], references: [film_id], onDelete: NoAction, onUpdate: NoAction, map: "banner_ibfk_1")
+
+  @@index([film_id], map: "film_id")
+}
+
+model book_ticket {
+  email          String    @db.VarChar(255)
+  book_ticket_id Int       @unique(map: "book_ticket_id") @default(autoincrement())
+  showtimes_id   Int
+  seat_id        Int
+  ticket_price   String    @db.VarChar(255)
+  users          users     @relation(fields: [email], references: [email], onDelete: NoAction, onUpdate: NoAction, map: "book_ticket_ibfk_1")
+  showtimes      showtimes @relation(fields: [showtimes_id], references: [showtimes_id], onDelete: NoAction, onUpdate: NoAction, map: "book_ticket_ibfk_2")
+  seat           seat      @relation(fields: [seat_id], references: [seat_id], onDelete: NoAction, onUpdate: NoAction, map: "book_ticket_ibfk_3")
+
+  @@id([email, showtimes_id])
+  @@index([seat_id], map: "seat_id")
+  @@index([showtimes_id], map: "showtimes_id")
+}
+
+model cinema {
+  cinema_id      Int         @id @default(autoincrement())
+  name           String      @db.VarChar(255)
+  cinemaGroup_id Int
+  cinemaGroup    cinemaGroup @relation(fields: [cinemaGroup_id], references: [cinemaGroup_id], onDelete: NoAction, onUpdate: NoAction, map: "cinema_ibfk_1")
+  seat           seat[]
+  showtimes      showtimes[]
+
+  @@index([cinemaGroup_id], map: "cinemaGroup_id")
+}
+
+model cinemaGroup {
+  cinemaGroup_id  Int          @id @default(autoincrement())
+  name            String       @db.VarChar(255)
+  address         String       @db.VarChar(255)
+  cinemaSystem_id Int
+  cinema          cinema[]
+  cinemaSystem    cinemaSystem @relation(fields: [cinemaSystem_id], references: [cinemaSystem_id], onDelete: NoAction, onUpdate: NoAction, map: "cinemaGroup_ibfk_1")
+
+  @@index([cinemaSystem_id], map: "cinemaSystem_id")
+}
+
+model cinemaSystem {
+  cinemaSystem_id Int           @id @default(autoincrement())
+  name            String        @db.VarChar(255)
+  logo            String        @db.VarChar(255)
+  cinemaGroup     cinemaGroup[]
+}
+
+model comment {
+  comment_id Int     @id @default(autoincrement())
+  email      String  @db.VarChar(255)
+  film_id    Int
+  date       String? @db.VarChar(255)
+  content    String? @db.Text
+  users      users   @relation(fields: [email], references: [email], onDelete: NoAction, onUpdate: NoAction, map: "comment_ibfk_1")
+  film       film    @relation(fields: [film_id], references: [film_id], onDelete: NoAction, onUpdate: NoAction, map: "comment_ibfk_2")
+
+  @@index([email], map: "email")
+  @@index([film_id], map: "film_id")
+}
+
+model film {
+  film_id     Int         @id @default(autoincrement())
+  name        String      @db.VarChar(255)
+  trailer     String      @db.VarChar(255)
+  image       String?     @db.VarChar(255)
+  description String?     @db.Text
+  release_day String?     @db.VarChar(100)
+  rate        Int?
+  hot         Boolean?
+  coming      Boolean?
+  showing     Boolean?
+  banner      banner[]
+  comment     comment[]
+  showtimes   showtimes[]
+}
+
+model seat {
+  seat_id     Int           @id @default(autoincrement())
+  seat_name   String        @db.VarChar(255)
+  seat_type   String        @db.VarChar(255)
+  cinema_id   Int
+  book_ticket book_ticket[]
+  cinema      cinema        @relation(fields: [cinema_id], references: [cinema_id], onDelete: NoAction, onUpdate: NoAction, map: "seat_ibfk_1")
+
+  @@index([cinema_id], map: "cinema_id")
+}
+
+model showtimes {
+  showtimes_id  Int           @id @default(autoincrement())
+  cinema_id     Int
+  film_id       Int
+  showing_times String?       @db.VarChar(100)
+  ticket_price  String        @db.VarChar(100)
+  book_ticket   book_ticket[]
+  cinema        cinema        @relation(fields: [cinema_id], references: [cinema_id], onDelete: NoAction, onUpdate: NoAction, map: "showtimes_ibfk_1")
+  film          film          @relation(fields: [film_id], references: [film_id], onDelete: NoAction, onUpdate: NoAction, map: "showtimes_ibfk_2")
+
+  @@index([cinema_id], map: "cinema_id")
+  @@index([film_id], map: "film_id")
+}
+
+model users {
+  email       String        @id @db.VarChar(255)
+  password    String        @db.VarChar(255)
+  fullname    String        @db.VarChar(255)
+  phoneNumber String        @db.VarChar(20)
+  avatar      String        @db.VarChar(255)
+  user_type   String        @db.VarChar(50)
+  book_ticket book_ticket[]
+  comment     comment[]
+}
