@@ -9,6 +9,9 @@ async function bootstrap() {
   app.enableCors();
   app.use(express.static('.'));
 
+  // LINK ERD
+  // https://lucid.app/lucidchart/6c7fb76f-ceab-4757-85d6-22d2d6c172ef/view?page=0_0&invitationId=inv_0041c718-65db-4cdb-a705-3bdb1b8f74c0#
+
   // const config = new DocumentBuilder().setTitle('swager nè').addBearerAuth().build();
   // const document = SwaggerModule.createDocument(app,config);
   // SwaggerModule.setup('/swagger',app,document); // localhost:5431/swagger
