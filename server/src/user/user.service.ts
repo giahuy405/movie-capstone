@@ -227,7 +227,5 @@ export class UserService {
       throw new HttpException('Failed JWT', 400);
     }
   }
-  async uploadAvatar() {
-    
-  }
+ 
 }

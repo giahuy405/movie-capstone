@@ -15,8 +15,12 @@ export class FilmService {
   private prisma = new PrismaClient();
 
   async bannerList() {
-    const banners = this.prisma.banner.findMany();
-    return banners;
+    try {
+      const banners = this.prisma.banner.findMany();
+      return banners;
+    } catch (err) {
+      throw new HttpException('Failed', 400);
+    }
   }
   async listFilm(term: string) {
     try {
@@ -108,38 +112,52 @@ export class FilmService {
 
   // also upload and update
   async uploadAvatar(filmId: string, file: Express.Multer.File) {
-    const film = await this.prisma.film.findFirst({
-      where: {
-        film_id: Number(filmId),
-      },
-    });
-    // thay path
-    film.image = file.filename;
+    try {
+      const film = await this.prisma.film.findFirst({
+        where: {
+          film_id: Number(filmId),
+        },
+      });
+      // thay path
+      film.image = file.filename;
 
-    // lưu vào db
-    await this.prisma.film.update({
-      data: film,
-      where: {
-        film_id: Number(filmId),
-      },
-    });
-    return { message: 'Upload Successfully' };
+      // lưu vào db
+      await this.prisma.film.update({
+        data: film,
+        where: {
+          film_id: Number(filmId),
+        },
+      });
+      return { message: 'Upload Successfully' };
+    } catch (err) {
+      throw new HttpException('Failed', 400);
+    }
   }
   async deleteFilm(filmId: string) {
-    const data = await this.prisma.film.delete({
-      where: {
-        film_id: Number(filmId),
-      },
-    });
-    return { message: 'Delete Successfully', data };
+    try {
+      const data = await this.prisma.film.delete({
+        where: {
+          film_id: Number(filmId),
+        },
+      });
+      return { message: 'Delete Successfully', data };
+    } catch (err) {
+      throw new HttpException('Failed', 400);
+    }
   }
 
   async getInfoFilm(filmId: string) {
+   try{
     const data = await this.prisma.film.findFirst({
       where: {
         film_id: Number(filmId),
       },
     });
     return { message: 'Delete Successfully', data };
+   }
+    catch (err) {
+      throw new HttpException('Failed', 400);
+    }
   }
+
 }

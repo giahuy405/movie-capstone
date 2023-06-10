@@ -93,4 +93,5 @@ export class FilmController {
   getInfoFilm(  @Param("filmId") filmId:string) {
     return this.filmService.getInfoFilm(filmId);
   }
+
 }

@@ -23,4 +23,9 @@ export class CinemaController {
   getInfoCinemaGroup(@Param('id') id: string) {
     return this.cinemaService.getInfoCinemaGroup(id);
   }
+
+  @Get('get-info-showtimes-film/:filmId')
+  getInfoShowtimesFilm(  @Param("filmId") filmId:string) {
+    return this.cinemaService.getInfoShowtimesFilm(filmId);
+  }
 }

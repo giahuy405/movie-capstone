@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -15,20 +15,47 @@ export class CinemaService {
 
 
   async getInfoCinemaSystem(id:string) {
-     const res = await this.prisma.cinemaSystem.findFirst({
+   try{
+    const res = await this.prisma.cinemaSystem.findFirst({
       where:{
         cinemaSystem_id:Number(id)
       }
      });
+     if(!res) {
+      throw new HttpException('Failed', 400);
+     }
+
      return res;
+   }catch(err){
+    throw new HttpException('Failed', 400);
+   }
   }
   async getInfoCinemaGroup(id:string) {
-    const res = await this.prisma.cinemaGroup.findMany({
-     where:{
-       cinemaSystem_id:Number(id)
-     }
-    });
-    return res;
+    try{
+      const res = await this.prisma.cinemaGroup.findMany({
+        where:{
+          cinemaSystem_id:Number(id)
+        }
+       });
+       if(!res) {
+         throw new HttpException('Failed', 400);
+        }
+       return res;
+    }catch(err){
+      throw new HttpException('Failed', 400);
+    }
  }
-   
+ async getInfoShowtimesFilm(filmId: string) {
+  const data = await this.prisma.film.findFirst({
+    where: {
+      film_id: Number(filmId),
+    },
+  });
+  const dataShowtimes = await this.prisma.showtimes.findMany({
+    where:{
+      film_id: Number(filmId),
+    }
+  });
+  return { message: ' Successfully', data };
+}
 }
