@@ -105,4 +105,41 @@ export class FilmService {
       throw new Error('Failed to retrieve films');
     }
   }
+
+  // also upload and update
+  async uploadAvatar(filmId: string, file: Express.Multer.File) {
+    const film = await this.prisma.film.findFirst({
+      where: {
+        film_id: Number(filmId),
+      },
+    });
+    // thay path
+    film.image = file.filename;
+
+    // lưu vào db
+    await this.prisma.film.update({
+      data: film,
+      where: {
+        film_id: Number(filmId),
+      },
+    });
+    return { message: 'Upload Successfully' };
+  }
+  async deleteFilm(filmId: string) {
+    const data = await this.prisma.film.delete({
+      where: {
+        film_id: Number(filmId),
+      },
+    });
+    return { message: 'Delete Successfully', data };
+  }
+
+  async getInfoFilm(filmId: string) {
+    const data = await this.prisma.film.findFirst({
+      where: {
+        film_id: Number(filmId),
+      },
+    });
+    return { message: 'Delete Successfully', data };
+  }
 }

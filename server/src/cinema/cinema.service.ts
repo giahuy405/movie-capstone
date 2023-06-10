@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class CinemaService {
-  create(createCinemaDto: CreateCinemaDto) {
-    return 'This action adds a new cinema';
-  }
+  constructor(
+    private jwtService: JwtService,
+    private configService: ConfigService,
+  ) {}
+  private prisma = new PrismaClient();
 
-  findAll() {
-    return `This action returns all cinema`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cinema`;
+  async getInfoCinemaSystem(id:string) {
+     const res = await this.prisma.cinemaSystem.findFirst({
+      where:{
+        cinemaSystem_id:Number(id)
+      }
+     });
+     return res;
   }
-
-  update(id: number, updateCinemaDto: UpdateCinemaDto) {
-    return `This action updates a #${id} cinema`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} cinema`;
-  }
+  async getInfoCinemaGroup(id:string) {
+    const res = await this.prisma.cinemaGroup.findMany({
+     where:{
+       cinemaSystem_id:Number(id)
+     }
+    });
+    return res;
+ }
+   
 }

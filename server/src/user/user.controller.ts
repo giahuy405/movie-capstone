@@ -26,6 +26,11 @@ import { diskStorage } from 'multer';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Get('get-user-type')
+  getUserType() {
+    return this.userService.getUserType();
+  }
+
   @Get('user-list')
   getListUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.getListUser();
@@ -79,19 +84,5 @@ export class UserController {
   }
 
 
-  // @UseGuards(AuthGuard('jwt'))
-  @UseInterceptors(FileInterceptor('file',{
-    storage:diskStorage({
-      destination:'./images',
-      filename:(req,file,cb)=>{
-        console.log(file)
-        cb(null,Date.now() + "_" + file.originalname);
-      }
-    })
-  }))
-  @Post('upload-avatar')
-  uploadAvatar(@UploadedFile() file:Express.Multer.File) {
 
-    return this.userService.uploadAvatar();
-  }
 }

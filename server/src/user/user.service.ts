@@ -11,6 +11,15 @@ export class UserService {
 
   private prisma = new PrismaClient();
 
+  async getUserType() {
+    return {
+      message: 'Successfully',
+      data: [
+        { user_type: 'normal', user_type_name: 'Khách hàng' },
+        { user_type: 'admin', user_type_name: 'Quản trị' },
+      ],
+    };
+  }
   async getListUser() {
     const data = await this.prisma.users.findMany();
     return data;
@@ -29,6 +38,7 @@ export class UserService {
       throw new Error('Failed to retrieve user pagination');
     }
   }
+
   async searchUser(term: string) {
     try {
       const users = await this.prisma.users.findMany({
@@ -85,10 +95,31 @@ export class UserService {
     const token = headers.authorization?.split(' ')[1];
 
     const decodedToken = this.jwtService.decode(token);
-    let data;
+    let infoUser;
     if (typeof decodedToken === 'object' && decodedToken !== null) {
-      data = decodedToken.data;
-      return data;
+      infoUser = decodedToken.data;
+
+      const dataBooking = await this.prisma.book_ticket.findMany();
+      let infoBook = [];
+      for (let item of dataBooking) {
+        const showtimes = await this.prisma.showtimes.findFirst({
+          where: {
+            showtimes_id: Number(item.showtimes_id),
+          },
+        });
+        let { cinema_id, film_id, showing_times, ticket_price } = showtimes;
+        const film = await this.prisma.film.findFirst({
+          where: { film_id },
+        });
+        console.log(film, 'film');
+      }
+
+      return {
+        message: 'Successfully',
+        data: {
+          infoUser,
+        },
+      };
     } else {
       throw new Error('Failed JWT');
     }
@@ -196,8 +227,7 @@ export class UserService {
       throw new HttpException('Failed JWT', 400);
     }
   }
-  async uploadAvatar(){
+  async uploadAvatar() {
     
   }
-
 }

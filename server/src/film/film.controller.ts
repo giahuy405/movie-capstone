@@ -8,10 +8,14 @@ import {
   Delete,
   Query,
   ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { FilmService } from './film.service';
 import { CreateFilmDto } from './dto/create-film.dto';
 import { UpdateFilmDto } from './dto/update-film.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('film-manager')
 export class FilmController {
@@ -58,5 +62,35 @@ export class FilmController {
       fromDay,
       toDay,
     );
+  }
+
+  // @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: process.cwd() + '/public/images',
+        filename: (req, file, cb) => {
+          console.log(file);
+          cb(null, Date.now() + '_' + file.originalname);
+        },
+      }),
+    }),
+  )
+  @Post('upload-film/:filmId')
+  uploadAvatar(@UploadedFile() 
+     file: Express.Multer.File,
+     @Param("filmId") filmId:string)
+    {
+    return this.filmService.uploadAvatar(filmId,file);
+  }
+
+  @Delete('delete-film/:filmId')
+  deleteFilm(  @Param("filmId") filmId:string) {
+    return this.filmService.deleteFilm(filmId);
+  }
+
+  @Get('get-info-film/:filmId')
+  getInfoFilm(  @Param("filmId") filmId:string) {
+    return this.filmService.getInfoFilm(filmId);
   }
 }

@@ -60,7 +60,6 @@ export class BookTicketService {
         if (!seat) {
           throw new Error('Seat not found');
         }
-        // let newId = Math.floor(Math.random() * Date.now()).toString(16);
 
         let createBook_Ticket = await this.prisma.book_ticket.create({
           data: {
@@ -77,6 +76,28 @@ export class BookTicketService {
     } else {
       throw new HttpException('Failed JWT', 400);
     }
+  }
+  async getCinemaList(req: Request, body) {
+    const { showtimes_id } = body;
+    const showtimes = await this.prisma.showtimes.findFirst({
+      where: {
+        showtimes_id: Number(showtimes_id),
+      },
+    });
+    const { cinema_id, film_id, showing_times, ticket_price } = showtimes;
+    const filmInfo = await this.prisma.film.findFirst({
+      where: {
+        film_id: Number(film_id),
+      },
+    });
+    const seatInfo = await this.prisma.seat.findMany({
+      where: {
+        cinema_id: Number(cinema_id),
+      },
+    });
+    console.log(seatInfo, 'seatInfo');
+
+    return { message: 'ok', data: { filmInfo, seatList: seatInfo } };
   }
   async createShowTimes(req: Request, body) {
     let { film_id, showing_times, cinema_id, ticket_price } = body;
