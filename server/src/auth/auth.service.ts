@@ -13,7 +13,7 @@ export class AuthService {
 
   private prisma = new PrismaClient();
 
-  async login(userLogin: UserLogin): Promise<string> {
+  async login(userLogin: UserLogin): Promise<any> {
     const { email, password } = userLogin;
     let checkUser = await this.prisma.users.findFirst({
       where: {
@@ -31,7 +31,7 @@ export class AuthService {
             secret: this.configService.get('SECRET_KEY'),
           },
         );
-        return token;
+        return token
       }
     }
     throw new HttpException('Email hoặc mật khẩu ko đúng', 400);

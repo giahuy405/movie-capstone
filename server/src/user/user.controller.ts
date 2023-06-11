@@ -21,11 +21,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { users } from '@prisma/client';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('User manager')
 @Controller('user-manager')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get('get-user-type')
   getUserType() {
     return this.userService.getUserType();
@@ -58,31 +61,29 @@ export class UserController {
     return this.userService.searchUserPagination(term, page, pageSize);
   }
 
-  // not done, also the info-account 
+  // not done, also the info-account
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post('info-user')
   infoUser(@Req() req: Request) {
     return this.userService.infoUser(req);
   }
-
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post('add-user')
   addUser(@Req() req: Request, @Body() users: users) {
-    return this.userService.addUser(req,users);
+    return this.userService.addUser(req, users);
   }
-
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Put('update-info-user')
   updateInfoUser(@Req() req: Request, @Body() users: users) {
-    return this.userService.updateInfoUser(req,users);
+    return this.userService.updateInfoUser(req, users);
   }
-
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Delete('delete-user/:email')
-  deleteUser(@Req() req: Request,@Param('email') email: string) {
-    return this.userService.deleteUser(email,req);
+  deleteUser(@Req() req: Request, @Param('email') email: string) {
+    return this.userService.deleteUser(email, req);
   }
-
-
-
 }

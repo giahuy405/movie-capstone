@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 @Module({
-  imports: [CinemaModule, FilmModule, UserModule, BookTicketModule,ConfigModule.forRoot({ isGlobal: true }), AuthModule, 
+  imports: [AuthModule, BookTicketModule, UserModule, FilmModule, CinemaModule,ConfigModule.forRoot({ isGlobal: true }), 
   JwtModule.register({global:true})],
   controllers: [AppController],
   providers: [AppService],

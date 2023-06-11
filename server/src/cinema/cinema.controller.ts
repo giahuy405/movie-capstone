@@ -10,7 +10,8 @@ import {
 import { CinemaService } from './cinema.service';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Cinema manager')
 @Controller('cinema-manager')
 export class CinemaController {
   constructor(private readonly cinemaService: CinemaService) {}

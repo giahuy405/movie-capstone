@@ -1,15 +1,25 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class Auth {}
 
 export class UserLogin {
-    email:string;
-    password:string;
+  @ApiProperty()
+  email: string;
+  @ApiProperty()
+  password: string;
 }
 
 export class UserSignup {
-    email:string;
-    password:string;
-    fullname:string;
-    phoneNumber:string;
-    avatar:string;
-    user_type:string;
+  @ApiProperty()
+  email: string;
+  @ApiProperty()
+  password: string;
+  @ApiProperty()
+  fullname: string;
+  @ApiProperty()
+  phoneNumber: string;
+  @ApiProperty()
+  avatar: string;
+  @ApiProperty()
+  user_type: string;
 }

@@ -54,8 +54,20 @@ export class CinemaService {
   const dataShowtimes = await this.prisma.showtimes.findMany({
     where:{
       film_id: Number(filmId),
+    },
+    include:{
+      cinema:true
     }
   });
-  return { message: ' Successfully', data };
+  let newDataShowtimes = []
+  for(let item of dataShowtimes){
+    let {cinema_id,film_id,...rest} = item;
+    newDataShowtimes.push(rest);
+  }
+
+  return { message: ' Successfully', content:[
+    data,
+    newDataShowtimes
+  ] };
 }
 }

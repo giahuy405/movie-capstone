@@ -16,7 +16,9 @@ import { CreateFilmDto } from './dto/create-film.dto';
 import { UpdateFilmDto } from './dto/update-film.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Film manager')
 @Controller('film-manager')
 export class FilmController {
   constructor(private readonly filmService: FilmService) {}
