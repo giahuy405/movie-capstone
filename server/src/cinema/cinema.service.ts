@@ -13,61 +13,64 @@ export class CinemaService {
   ) {}
   private prisma = new PrismaClient();
 
-
-  async getInfoCinemaSystem(id:string) {
-   try{
-    const res = await this.prisma.cinemaSystem.findFirst({
-      where:{
-        cinemaSystem_id:Number(id)
+  async getInfoCinemaSystem(id: string) {
+    try {
+      const res = await this.prisma.cinemaSystem.findFirst({
+        where: {
+          cinemaSystem_id: Number(id),
+        },
+      });
+      if (!res) {
+        throw new HttpException('Failed', 400);
       }
-     });
-     if(!res) {
-      throw new HttpException('Failed', 400);
-     }
 
-     return res;
-   }catch(err){
-    throw new HttpException('Failed', 400);
-   }
+      return res;
+    } catch (err) {
+      throw new HttpException('Failed', 400);
+    }
   }
-  async getInfoCinemaGroup(id:string) {
-    try{
+  async getInfoCinemaGroup(id: string) {
+    try {
       const res = await this.prisma.cinemaGroup.findMany({
-        where:{
-          cinemaSystem_id:Number(id)
+        where: {
+          cinemaSystem_id: Number(id),
+          
+        },
+        include:{
+          cinemaSystem:true
         }
-       });
-       if(!res) {
-         throw new HttpException('Failed', 400);
-        }
-       return res;
-    }catch(err){
+     
+      });
+      if (!res) {
+        throw new HttpException('Failed', 400);
+      }
+      return res;
+    } catch (err) {
       throw new HttpException('Failed', 400);
     }
- }
- async getInfoShowtimesFilm(filmId: string) {
-  const data = await this.prisma.film.findFirst({
-    where: {
-      film_id: Number(filmId),
-    },
-  });
-  const dataShowtimes = await this.prisma.showtimes.findMany({
-    where:{
-      film_id: Number(filmId),
-    },
-    include:{
-      cinema:true
-    }
-  });
-  let newDataShowtimes = []
-  for(let item of dataShowtimes){
-    let {cinema_id,film_id,...rest} = item;
-    newDataShowtimes.push(rest);
   }
+  async getInfoShowtimesFilm(filmId: string) {
+    const data = await this.prisma.film.findFirst({
+      where: {
+        film_id: Number(filmId),
+      },
+    });
+    const dataShowtimes = await this.prisma.showtimes.findMany({
+      where: {
+        film_id: Number(filmId),
+      },
 
-  return { message: ' Successfully', content:[
-    data,
-    newDataShowtimes
-  ] };
-}
+      select: {
+        cinema: true,
+        book_ticket: true,
+      },
+    });
+    // let newDataShowtimes = []
+    // for(let item of dataShowtimes){
+    //   let {cinema_id,film_id,...rest} = item;
+    //   newDataShowtimes.push(rest);
+    // }
+
+    return { message: ' Successfully', content: [data, dataShowtimes] };
+  }
 }

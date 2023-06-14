@@ -1,0 +1,738 @@
+{
+	"info": {
+		"_postman_id": "dc0bc51b-2e66-4c27-834b-78db9988e86e",
+		"name": "final capstone movie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26679748"
+	},
+	"item": [
+		{
+			"name": "book ticket manager",
+			"item": [
+				{
+					"name": "get all user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlcjNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWlQwb1BILmZkM2NVZVo5QmswREh6Lm1BQ2w4NS9WQmQ3VVJ6WFNRWlhjbGp3VWlLVnlCVUMiLCJmdWxsbmFtZSI6Ikh1eSAiLCJwaG9uZU51bWJlciI6IjEyMzQiLCJhdmF0YXIiOiIxMjM0IiwidXNlcl90eXBlIjoibm9ybWFsIn0sImlhdCI6MTY4NDc3MTI2NSwiZXhwIjoxNzc5NDQ0MDY1fQ.HushnpwIx1JUp6Na9EUpWJP3cHYZX6q9fth2HN555kM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/book-ticket-manager/get-all-user",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"book-ticket-manager",
+								"get-all-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "book ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZ2lhaHV5NEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRxNURpd2Z1S2l0QmI1R1gvM1J4OS5ldHJWZU5NMHhRQXovdXBuVzBVV2FEQ0xmZjZmV2pJQyIsImZ1bGxuYW1lIjoiUGjhuqFtIEdpYSBodXkiLCJwaG9uZU51bWJlciI6IjA5ODc2NTQzMjEiLCJhdmF0YXIiOiIxMjM0IiwidXNlcl90eXBlIjoibm9ybWFsIn0sImlhdCI6MTY4NjM3MTE1OSwiZXhwIjoxNzgxMDQzOTU5fQ.oKGze_5kY_JKdkRQwu7j5ZaSrNnkSLAjRuSkOJT5sOA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"showtimes_id\": \"2\",\n    \"list_ticket\": [\n        {\n            \"seat_id\": \"88\",\n            \"ticket_price\": \"100000\"\n        },\n         {\n            \"seat_id\": \"55\",\n            \"ticket_price\": \"85000\"\n        },\n          {\n            \"seat_id\": \"54\",\n            \"ticket_price\": \"85000\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/book-ticket-manager/book-ticket",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"book-ticket-manager",
+								"book-ticket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cinema list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"showtimes_id\":\"8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/book-ticket-manager/get-cinema-list",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"book-ticket-manager",
+								"get-cinema-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create show times",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlcjNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWlQwb1BILmZkM2NVZVo5QmswREh6Lm1BQ2w4NS9WQmQ3VVJ6WFNRWlhjbGp3VWlLVnlCVUMiLCJmdWxsbmFtZSI6Ikh1eSAiLCJwaG9uZU51bWJlciI6IjEyMzQiLCJhdmF0YXIiOiIxMjM0IiwidXNlcl90eXBlIjoibm9ybWFsIn0sImlhdCI6MTY4NDc3MTI2NSwiZXhwIjoxNzc5NDQ0MDY1fQ.HushnpwIx1JUp6Na9EUpWJP3cHYZX6q9fth2HN555kM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"film_id\":\"1\", \n     \"showing_times\":\"2022-02-02 10:30:00\",\n     \"cinema_id\":\"2\",\n     \"ticket_price\":\"50000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/book-ticket-manager/create-showtimes",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"book-ticket-manager",
+								"create-showtimes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user manager",
+			"item": [
+				{
+					"name": "get user type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/get-user-type",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"get-user-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/user-list",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"user-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user list pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/user-list-pagination/1/2",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"user-list-pagination",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/search-user?term=user",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"search-user"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search user pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/search-user-pagination?term=user&page=1&pageSize=2",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"search-user-pagination"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "user"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "info user from bear token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZ2lhaHV5NEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRxNURpd2Z1S2l0QmI1R1gvM1J4OS5ldHJWZU5NMHhRQXovdXBuVzBVV2FEQ0xmZjZmV2pJQyIsImZ1bGxuYW1lIjoiUGjhuqFtIEdpYSBodXkiLCJwaG9uZU51bWJlciI6IjA5ODc2NTQzMjEiLCJhdmF0YXIiOiIxMjM0IiwidXNlcl90eXBlIjoibm9ybWFsIn0sImlhdCI6MTY4NjM4MDQzNiwiZXhwIjoxNzgxMDUzMjM2fQ.yM_d2gUO1WfUAPB8mJxGsjG9jPHH_CFU533CJge3eII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/info-user",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"info-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWlQwb1BILmZkM2NVZVo5QmswREh6Lm1BQ2w4NS9WQmQ3VVJ6WFNRWlhjbGp3VWlLVnlCVUMiLCJmdWxsbmFtZSI6IkphbmUgU21pdGgiLCJwaG9uZU51bWJlciI6Ijk4NzY1NDMyMSIsImF2YXRhciI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzE0OS8xNDkwNzEucG5nIiwidXNlcl90eXBlIjoiYWRtaW4ifSwiaWF0IjoxNjg0ODExNTQxLCJleHAiOjE3Nzk0ODQzNDF9.cRkpxvCAThZqiLsxQJBApuuAW4YvKWZJhhogWU5KgS8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"no@gmail.com\",\n    \"fullname\":\"Tài\",\n    \"avatar\":\"123\",\n    \"phoneNumber\":\"7654\",\n    \"user_type\":\"admin\",\n    \"password\":\"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/add-user",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"add-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update info user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWlQwb1BILmZkM2NVZVo5QmswREh6Lm1BQ2w4NS9WQmQ3VVJ6WFNRWlhjbGp3VWlLVnlCVUMiLCJmdWxsbmFtZSI6IkphbmUgU21pdGgiLCJwaG9uZU51bWJlciI6Ijk4NzY1NDMyMSIsImF2YXRhciI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzE0OS8xNDkwNzEucG5nIiwidXNlcl90eXBlIjoiYWRtaW4ifSwiaWF0IjoxNjg0ODExNTQxLCJleHAiOjE3Nzk0ODQzNDF9.cRkpxvCAThZqiLsxQJBApuuAW4YvKWZJhhogWU5KgS8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abcd@gmail.com\",\n    \"fullname\": \"hải lí\",\n    \"avatar\": \"12344444\",\n    \"phoneNumber\": \"7654\",\n    \"user_type\": \"admin\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/update-info-user",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"update-info-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlcjJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWlQwb1BILmZkM2NVZVo5QmswREh6Lm1BQ2w4NS9WQmQ3VVJ6WFNRWlhjbGp3VWlLVnlCVUMiLCJmdWxsbmFtZSI6IkphbmUgU21pdGgiLCJwaG9uZU51bWJlciI6Ijk4NzY1NDMyMSIsImF2YXRhciI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzE0OS8xNDkwNzEucG5nIiwidXNlcl90eXBlIjoiYWRtaW4ifSwiaWF0IjoxNjg0ODExNTQxLCJleHAiOjE3Nzk0ODQzNDF9.cRkpxvCAThZqiLsxQJBApuuAW4YvKWZJhhogWU5KgS8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/user-manager/delete-user/user1@gmail.com",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"user-manager",
+								"delete-user",
+								"user1@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "film manager",
+			"item": [
+				{
+					"name": "get banner list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/banner-list",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"banner-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list film",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/list-film?term=j",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"list-film"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "j"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list film pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/list-film-pagination?term=U&page=1&pageSize=3",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"list-film-pagination"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "U"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list film by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/list-film-by-date?term=&page=1&pageSize=5&fromDay=2015-01-01&toDay=2024-01-01",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"list-film-by-date"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "fromDay",
+									"value": "2015-01-01"
+								},
+								{
+									"key": "toDay",
+									"value": "2024-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "New",
+									"type": "text"
+								},
+								{
+									"key": "trailer",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "stupid_dog.png"
+								},
+								{
+									"key": "description",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "release_day",
+									"value": "2022-01-01",
+									"type": "text"
+								},
+								{
+									"key": "rate",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "hot",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "coming",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "showing",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/upload-film/1",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"upload-film",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete film",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/delete-film/1",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"delete-film",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get info film",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/film-manager/get-info-film/1",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"film-manager",
+								"get-info-film",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cinema manager",
+			"item": [
+				{
+					"name": "get info cinemaSystem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/cinema-manager/get-info-cinema-sys/1",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"cinema-manager",
+								"get-info-cinema-sys",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get info cinemaGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{movieDomain}}/cinema-manager/get-info-cinema-group/1",
+							"host": [
+								"{{movieDomain}}"
+							],
+							"path": [
+								"cinema-manager",
+								"get-info-cinema-group",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get info show times film",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"giahuy4@gmail.com\",\n    \"password\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{movieDomain}}/auth/login",
+					"host": [
+						"{{movieDomain}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"giahuy4@gmail.com\",\n    \"fullname\":\"Phạm Gia huy\",\n    \"avatar\":\"1234\",\n    \"phoneNumber\":\"0987654321\",\n    \"user_type\":\"admin\",\n    \"password\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{movieDomain}}/auth/signUp",
+					"host": [
+						"{{movieDomain}}"
+					],
+					"path": [
+						"auth",
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -14,7 +14,7 @@ import { CreateBookTicketDto } from './dto/create-book-ticket.dto';
 import { UpdateBookTicketDto } from './dto/update-book-ticket.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
-import { BookTicket, CreateShowtimes } from './entities/book-ticket.entity';
+import {   BookTicket, CreateShowtimes } from './entities/book-ticket.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Booking manager')
@@ -42,7 +42,7 @@ export class BookTicketController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post('book-ticket')
-  BookTicket(@Req() req: Request, @Body() body) {
+  BookTicket(@Req() req: Request, @Body() body:BookTicket) {
     return this.bookTicketService.bookTicket(req, body);
   }
 

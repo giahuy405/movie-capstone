@@ -1,11 +1,20 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class Seat {
   seat_id: string;
   ticket_price: string;
 };
 
 export class BookTicket {
+  @ApiProperty()
   showtimes_id: string;
-  list_seat: Seat[];
+  @ApiProperty()
+  list_ticket: [
+    {
+      seat_id: string;
+      ticket_price: string;
+    }
+  ];
 }
 
 export class CreateShowtimes{

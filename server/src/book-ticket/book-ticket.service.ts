@@ -29,7 +29,7 @@ export class BookTicketService {
       throw new Error('Failed JWT');
     }
   }
-  async bookTicket(req: Request, body) {
+  async bookTicket(req: Request, body:BookTicket) {
     const { showtimes_id, list_ticket } = body;
     // lấy thông tin email ra từ thằng token dc FE gửi lên
     const headers = req.headers as { authorization?: string };
